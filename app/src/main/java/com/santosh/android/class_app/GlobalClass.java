@@ -14,16 +14,6 @@ public class GlobalClass extends Application {
     public String ty;
     public String v;
 
-    public File file1;
-
-    public File getFile1() {
-        return file1;
-    }
-
-    public void setFile1(File file1) {
-        this.file1 = file1;
-    }
-
     public String getNa() {
         return na;
     }

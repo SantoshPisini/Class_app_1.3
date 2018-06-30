@@ -1,5 +1,6 @@
 package com.santosh.android.class_app;
 
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -37,18 +38,17 @@ public class tab1 extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
-
     private List<list_item1> listItems;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.tab1, container, false);
-        intab1(container, view);
+        intab1(view);
         return view;
     }
 
-    private void intab1(@Nullable ViewGroup  container, View view) {
+    private void intab1(View view) {
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView1);
         recyclerView.setHasFixedSize(true);
@@ -61,17 +61,23 @@ public class tab1 extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(false);
-                listItems.clear();
-                loadRecyclerViewData();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        listItems.clear();
+                        if(recyclerView.isDrawingCacheEnabled()){
+                            recyclerView.destroyDrawingCache();
+                        }
+                        loadRecyclerViewData();
+                    }
+                },3000);
             }
         });
-
     }
 
 
-    private void loadRecyclerViewData()
-    {
+    private void loadRecyclerViewData() {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading data . . .");
         progressDialog.show();
@@ -99,7 +105,7 @@ public class tab1 extends Fragment {
                                 }
                                 //end file
                                 //JSONArray jsonArray = new JSONArray(getAssetJSON());
-                                for (int i = 0; i < jsonArray.length(); i++) {
+                                for (int i = jsonArray.length()-1; i >= 0; i--) {
                                     JSONObject o = jsonArray.getJSONObject(i);
                                     list_item1 item = new list_item1(
                                             o.getString("name"),
@@ -126,8 +132,9 @@ public class tab1 extends Fragment {
                             //Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                             try{
                                 JSONArray jsonArray = new JSONArray(getAssetJSON());
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject o = jsonArray.getJSONObject(i);
+                                //for (int i = 0; i < jsonArray.length(); i++) {
+                                for (int i = jsonArray.length()-1; i >= 0; i--) {
+                                    JSONObject o = jsonArray.getJSONObject(i);
                                 list_item1 item = new list_item1(
                                         o.getString("name"),
                                         o.getString("number"),

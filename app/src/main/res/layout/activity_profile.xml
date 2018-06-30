@@ -1,55 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <ImageView
         android:id="@+id/circleImageView"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
         android:layout_width="248dp"
-        android:layout_height="241dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="241dp" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_gravity="center"
         android:layout_marginTop="27dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="26dp"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/tc"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Red"
+        android:paddingLeft="20dp"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/ta"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Green"
+        android:paddingLeft="20dp"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/per"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Blue"
+        android:paddingLeft="20dp"
+        android:textSize="18sp"/>
 
-    <Button
+    <EditText
+        android:id="@+id/tc1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Classes conducted"
+        android:inputType="phone"
+        android:paddingLeft="20dp"
+        android:textSize="16sp" />
+    <EditText
+        android:id="@+id/ta1"
+        android:layout_marginTop="20dp"
+        android:hint="Classes attended"
+        android:paddingLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:text="  *In this version attendance is store in your device only."
+        android:layout_marginTop="20dp"
+        android:hint="Classes attended"
+        android:layout_marginBottom="100dp"
+        android:layout_height="wrap_content" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/colorAccent"
-        android:text="  SIGN OUT   "
-        android:textSize="20sp"
-        android:id="@+id/button_logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_update_24dp"
+        android:layout_margin="25dp"/>
+</LinearLayout>
+</ScrollView>

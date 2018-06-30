@@ -100,7 +100,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private void sendFeedback() {
         final GlobalClass globalClass = (GlobalClass) getApplicationContext();
-        //Toast.makeText(FeedbackActivity.this,globalClass.getN()+"dvdjhvbdv",Toast.LENGTH_SHORT).show();
+        Toast.makeText(FeedbackActivity.this,globalClass.getNa()+"dvdjhvbdv",Toast.LENGTH_SHORT);
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Sending your feedback . . .");
         progressDialog.show();

@@ -35,14 +35,10 @@ public class MainActivity extends AppCompatActivity {
         if((ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)) {
             //Toast.makeText(this,"Write permissions NOT `granted !!!",Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-        }else{
-            //Toast.makeText(this,"Write permissions granted !!!",Toast.LENGTH_SHORT).show();
         }
         if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             //Toast.makeText(this,"Read permissions NOT granted !!!",Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
-        }else{
-            //Toast.makeText(this,"Read permissions granted !!!",Toast.LENGTH_SHORT).show();
         }
         //permissions ends
 
