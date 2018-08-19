@@ -21,8 +21,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,8 +33,8 @@ public class FeedbackActivity extends AppCompatActivity {
     private TextView textView;
 
     private static final String URL_DATA = "http://santosh36.ga/o2.php";
-    public String temp = "", name = ProfileActivity.getNname();
-    private float value = 3.0f;
+    public String temp = "";
+    private float value = 0.0f;
     public int type;//0=bug 1=view
 
     @Override
@@ -88,7 +89,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
             final GlobalClass globalClass = (GlobalClass) getApplicationContext();
-            globalClass.setNa(name);
+            globalClass.setNa(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
             globalClass.setTe(temp);
             globalClass.setTy(type + "");
             globalClass.setV(value + "");
@@ -100,7 +101,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private void sendFeedback() {
         final GlobalClass globalClass = (GlobalClass) getApplicationContext();
-        Toast.makeText(FeedbackActivity.this,globalClass.getNa()+"dvdjhvbdv",Toast.LENGTH_SHORT);
+        //Toast.makeText(this,FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),Toast.LENGTH_SHORT).show();
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Sending your feedback . . .");
         progressDialog.show();
@@ -111,7 +112,6 @@ public class FeedbackActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Successfully submitted", Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(getApplicationContext(),response+"bsdsdjhsvdvhvsdjvjsdvjhsdvjsvd",Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -123,7 +123,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameter = new HashMap<String, String>();
-                parameter.put("name", globalClass.getNa());
+                parameter.put("name", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());// ProfileActivity.getNname());//globalClass.getNa());
                 parameter.put("message", globalClass.getTe());
                 parameter.put("type", globalClass.getTy());
                 parameter.put("rating", globalClass.getV());
@@ -138,7 +138,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     public void Rbuttonclick(View view) {
         boolean checked = ((RadioButton) view).isChecked();
-        if (checked == true)
+        if (checked)
             switch (view.getId()) {
                 case R.id.rbt_1:
                     type = 0;

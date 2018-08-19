@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -70,6 +69,8 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.ViewHolder>{
             Picasso.with(context).load(R.mipmap.ish).into(holder.iv3_image);
         }else if(listItem.getId3().equals("nmt")){
             Picasso.with(context).load(R.mipmap.nmt).into(holder.iv3_image);
+        }else{
+            Picasso.with(context).load(R.mipmap.tt_placeholder).into(holder.iv3_image);
         }
         holder.cl3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +86,7 @@ public class MyAdapter3 extends RecyclerView.Adapter<MyAdapter3.ViewHolder>{
                     if (activities.size() > 0)
                         context.startActivity(intent);
                 }else{
-                    Toast.makeText(context,"Please wait ...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Please wait ... downloading file",Toast.LENGTH_LONG).show();
                     //downloading the file
                     file_download(listItem.getLink3(),(listItem.getId3()+listItem.getUnit_()+".pdf"));
                 }

@@ -1,6 +1,6 @@
 package com.santosh.android.class_app;
 
-public class list_item1 {
+public class    list_item1 {
     private String name1;
     private String number1;
     private String from_date;

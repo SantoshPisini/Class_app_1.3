@@ -13,7 +13,6 @@ package com.santosh.android.class_app;
         import android.view.MenuInflater;
         import android.view.MenuItem;
         import android.view.View;
-        import android.widget.Button;
         import android.widget.EditText;
         import android.widget.ImageView;
         import android.widget.TextView;
@@ -31,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tv1,tv2,tv3,tv4,tv5;
     EditText et1,et2;
     ImageView imageView;
-    static String name;
+    public static String name;
     String email="";
     String sigin_provider="";
     String profile_picture="";
@@ -154,10 +153,4 @@ public class ProfileActivity extends AppCompatActivity {
         Toast.makeText(this,"Attendance updated !!!",Toast.LENGTH_SHORT).show();
         displayAttendance();
     }
-
-    //to send name to feedback
-    public static String getNname(){
-        return name;
-    }
-    //end
 }

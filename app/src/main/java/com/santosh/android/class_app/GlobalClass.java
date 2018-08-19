@@ -52,6 +52,7 @@ public class GlobalClass extends Application {
             File dir = context.getCacheDir();
             deleteDir(dir);
         } catch (Exception e) {
+            //
         }
     }
 

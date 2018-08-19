@@ -19,20 +19,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher" />
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FeedbackActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".FeedbackActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="sensorPortrait"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TimeActivity" />
 
@@ -60,5 +65,4 @@
             </intent-filter>
         </service>
     </application>
-
 </manifest>

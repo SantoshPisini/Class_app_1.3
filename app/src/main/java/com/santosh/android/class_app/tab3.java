@@ -84,6 +84,9 @@ public class tab3 extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        if(response.equals("[]")){
+                            Toast.makeText(getContext(), "No Notes/Course files at present", Toast.LENGTH_LONG).show();
+                        }else {
                         progressDialog.dismiss();
                         try {
                             JSONArray jsonArray = new JSONArray(response);
@@ -120,7 +123,7 @@ public class tab3 extends Fragment {
                         } catch (IOException e) {
                             //    e.printStackTrace();
                         }
-                    }
+                    }}
                 },
                 new Response.ErrorListener() {
                     @Override

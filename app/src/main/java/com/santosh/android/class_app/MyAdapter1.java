@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -73,6 +72,8 @@ import java.util.List;
             Picasso.with(context).load(R.mipmap.ish).into(holder.imageView1);
         }else if(listItem.getName1().equals("nmt")){
             Picasso.with(context).load(R.mipmap.nmt).into(holder.imageView1);
+        }else{
+            Picasso.with(context).load(R.mipmap.tt_placeholder).into(holder.imageView1);
         }
         holder.cl1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +89,7 @@ import java.util.List;
                     if (activities.size() > 0)
                         context.startActivity(intent);
                 }else{
-                    Toast.makeText(context,"Please wait ...",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Please wait ... downloading file",Toast.LENGTH_LONG).show();
                     //downloading the file
                     file_download(listItem.getLink1(),(listItem.getName1()+listItem.getNumber1()+".pdf"));
                 }

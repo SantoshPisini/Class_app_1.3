@@ -1,26 +1,20 @@
 package com.santosh.android.class_app;
 
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.List;
 
 public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder>{
@@ -51,11 +45,22 @@ public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.ViewHolder>{
       holder.source.setText("source : "+listItem.getSource());
       holder.title.setText(listItem.getTitle2());
       holder.desc.setText(listItem.getDescription2());
-      Picasso.with(context).load(listItem.getImg()).into(holder.imageView2);
+      Linkify.addLinks(holder.desc,Linkify.ALL);//click on link
+      //Toast.makeText(context,"Long press on image to download !",Toast.LENGTH_LONG).show();
+      if(listItem.getImg().isEmpty()){
+          holder.imageView2.setVisibility(View.GONE);
+      }else{
+          Picasso.with(context).load(listItem.getImg()).into(holder.imageView2);
+      }
       holder.cl2.setOnLongClickListener(new View.OnLongClickListener() {
           @Override
           public boolean onLongClick(View view) {
-              downloadImage(listItem.getImg(),listItem.getTitle2()+".jpg");
+              try{
+                  downloadImage(listItem.getImg(),listItem.getTitle2()+".jpg");
+              }
+              catch(Exception e){
+
+              }
               return false;
           }
       });

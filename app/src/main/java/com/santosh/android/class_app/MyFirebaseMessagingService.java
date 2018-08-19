@@ -1,17 +1,14 @@
 package com.santosh.android.class_app;
 
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -22,27 +19,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+        try{
+            sendNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+        }catch (NullPointerException e){
+
+        }
     }
 
     private void sendNotification(String title,String message){
         Intent intent = new Intent(this,MainActivity.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.cg)
-        .setContentTitle(title)
-        .setContentText(message)
-        .setAutoCancel(true)
-        .setSound(sound)
-        .setContentIntent(pendingIntent);
-
-        Notification mNotification = notificationBuilder.build();
-        mNotification.sound = Uri.parse("android.resource://"
-                + getApplicationContext().getPackageName() + "/" +R.raw.siren);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0,mNotification);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext());
+        Notification mNotification = notificationBuilder.setSmallIcon(R.mipmap.ic_launcher)
+                .setSound(sound)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setContentTitle(title)
+                .setContentText(message)
+                .build();//        .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+//         .build();
+        mNotification.flags = Notification.FLAG_AUTO_CANCEL;
+        NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(65,mNotification);
     }
 }

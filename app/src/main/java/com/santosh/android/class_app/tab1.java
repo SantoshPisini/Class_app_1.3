@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -88,6 +89,9 @@ public class tab1 extends Fragment {
                         @Override
                         public void onResponse(String response) {
                             progressDialog.dismiss();
+                            if(response.equals("[]")){
+                                Toast.makeText(getContext(), "No Assignments at present", Toast.LENGTH_LONG).show();
+                            }else {
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
 
@@ -123,13 +127,13 @@ public class tab1 extends Fragment {
                             } catch (IOException e) {
                             //    e.printStackTrace();
                             }
-                        }
+                        }}
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progressDialog.dismiss();
-                            //Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Can't connect to internet. Showing last saved data", Toast.LENGTH_SHORT).show();
                             try{
                                 JSONArray jsonArray = new JSONArray(getAssetJSON());
                                 //for (int i = 0; i < jsonArray.length(); i++) {
